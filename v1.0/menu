@@ -1,0 +1,36 @@
+#!/bin/bash
+
+echo "Information Gathering Mini Tools"
+PS3='Masukan pilihan anda: '
+options=("Cek siapa aku" "Site code status" "Cek status public site" "Keluar" "About")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Cek siapa aku")
+            echo "IP Public "
+	    exec curl ipinfo.io/ip ipinfo.io/org ipinfo.io/region ipinfo.io/country
+            ;;
+        "Site code status")
+            read -p 'Masukan URL: ' url
+	    exec curl -Is $url | head -1
+            ;;
+        "Cek status public site")
+            read -p 'Masukan URL: ' url
+if curl -s --head  --request GET $url | grep "200 OK" > /dev/null
+then
+	echo "$(tput setaf 2)Alhamdulillah UP bos!$(tput sgr 0)"
+	echo "$url is $(tput setaf 2)UP$(tput sgr 0)"
+else
+	echo "$(tput setaf 1)Astaghfirullah DOWN bos!$(tput sgr 0)"
+	echo "$url is $(tput setaf 1)DOWN$(tput sgr 0)"
+fi
+            ;;
+        "Keluar")
+            break
+            ;;
+	"About")
+	    echo "Information Gathering Mini Tools by Rizal Danu"
+	    ;;
+        *) echo Waduh pilihan salah bos, cukup masukan nomor ya!;;
+    esac
+done
