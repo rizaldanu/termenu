@@ -8,7 +8,7 @@ do
     case $opt in
         "Cek siapa aku")
             echo "IP Public "
-	    exec curl ipinfo.io/ip ipinfo.io/org ipinfo.io/region ipinfo.io/country
+	    exec curl ipinfo.io/ip ipinfo.io/org ipinfo.io/city ipinfo.io/region ipinfo.io/country ipinfo.io/timezone
             ;;
         "Site code status")
             read -p 'Masukan URL: ' url
